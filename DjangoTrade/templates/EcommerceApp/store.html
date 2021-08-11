@@ -1,0 +1,428 @@
+{% extends '../base.html' %}
+{% block content %}
+{% load static %}
+
+
+{% if messages %}
+<div class="order__confirmation__msg__div">
+    <div class="order__confirmation__msg__div__close__btn">
+        <i class="far fa-window-close"></i>
+    </div>
+    <div class="order__confirmation__msg__div__h1">
+        {% for message in messages %}
+        <h1>
+            {{message}}
+        </h1>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+
+<div class="my__container__header__slider">
+    <div class="my__container__header__slider__inner__div">
+        <img src="{% static 'images/450.jpg' %}" alt="">
+        <img src="{% static 'images/fuck.png' %}" alt="">
+        <img src="{% static 'images/450.jpg' %}" alt="">
+        <img src="{% static 'images/fuck.png' %}" alt="">
+        <img src="{% static 'images/450.jpg' %}" alt="">
+
+    </div>
+</div>
+<div class="discount__img__4">
+    <img src="{% static 'images/1600.jpg' %}" alt="">
+    <img src="{% static 'images/1600.jpg' %}" alt="">
+    <img src="{% static 'images/1600.jpg' %}" alt="">
+    <img src="{% static 'images/1600.jpg' %}" alt="">
+</div>
+<div class="example__frame">
+    <div id="intro1" class="slider glide">
+        <div class="product__name__and__view__all">
+            <h1> Paithanis</h1>
+            <h1><a href="{% url 'paithani' %}">View All</a></h1>
+        </div>
+        <div class="slider__track glide__track" data-glide-el="track">
+            <ul class="slider__slides glide__slides should_be__padded_bottom">
+                {% for i in paithanis %}
+                <li class="slider__frame glide__slide" style="background-image: url({{i.imageurl}})">
+                    <div class="bg__img__info__pricing">
+                        <div class="bg__img__product__info">
+                            <h1>{{i.name}} </h1>
+                            <h1><i class="fas fa-rupee-sign"></i> {{i.price}}/-<span><a
+                                        href="{% url 'product_details' i.id %}">View<i
+                                            class="fas fa-external-link-alt"></i></a></span>
+                            </h1>
+                        </div>
+                        <div class="bg__img__buttons">
+                            <button style="margin-left: 15px;" data-product={{i.id}} data-action="add" data-fuck="buy"
+                                class="add-to-cart btn update-cart" style="transition: 0.4s;">
+                                <i class="fas fa-rupee-sign"></i> &nbsp; Buy Now</button>
+                            <button data-product={{i.id}} data-action="add" class="add-to-cart btn update-cart"
+                                style="transition: 0.4s;"><i class="fa fa-shopping-cart"></i> &nbsp; Add to
+                                Cart</button>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div data-glide-el="controls">
+            <button class="slider__arrow slider__arrow--prev glide__arrow glide__arrow--prev" data-glide-dir="<">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path d="M0 12l10.975 11 2.848-2.828-6.176-6.176H24v-3.992H7.646l6.176-6.176L10.975 1 0 12z" />
+                </svg>
+            </button>
+
+            <button class="slider__arrow slider__arrow--next glide__arrow glide__arrow--next" data-glide-dir=">">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path
+                        d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z" />
+                </svg>
+            </button>
+        </div>
+
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function (event) {
+        var glide = new Glide('#intro1', {
+            type: 'carousel',
+            perView: 6,
+            focusAt: 'center',
+            breakpoints: {
+                1500: {
+                    perView: 4
+                },
+                1200: {
+                    perView: 3
+                },
+                800: {
+                    perView: 2
+                },
+                480: {
+                    perView: 1
+                }
+            }
+        })
+
+        glide.mount()
+
+    })
+</script>
+<div class="the__back__ground__image"></div>
+<div class="example__frame">
+    <div class="product__name__and__view__all">
+        <h1> semi Paithanis</h1>
+        <h1><a href="{% url 'semi_paithani' %}">View All</a></h1>
+    </div>
+    <div id="intro2" class="slider glide">
+        <div class="slider__track glide__track" data-glide-el="track">
+            <ul class="slider__slides glide__slides">
+
+                {% for i in semi_paithanis %}
+                <li class="slider__frame glide__slide" style="background-image: url({{i.imageurl}})">
+                    <div class="bg__img__info__pricing">
+                        <div class="bg__img__product__info">
+                            <h1>{{i.name}} </h1>
+                            <h1><i class="fas fa-rupee-sign"></i> {{i.price}}/-<span><a
+                                        href="{% url 'product_details' i.id %}">View<i
+                                            class="fas fa-external-link-alt"></i></a></span>
+                            </h1>
+                        </div>
+                        <div class="bg__img__buttons">
+                            <button style="margin-left: 15px;" data-product={{i.id}} data-action="add" data-fuck="buy"
+                                class="add-to-cart btn update-cart" style="transition: 0.4s;">
+                                <i class="fas fa-rupee-sign"></i> &nbsp;
+                                Buy Now</button>
+                            <button data-product={{i.id}} data-action="add" class="add-to-cart btn update-cart"
+                                style="transition: 0.4s;"><i class="fa fa-shopping-cart"></i> &nbsp; Add to
+                                Cart</button>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+
+        <div data-glide-el="controls">
+            <button class="slider__arrow slider__arrow--prev glide__arrow glide__arrow--prev" data-glide-dir="<">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path d="M0 12l10.975 11 2.848-2.828-6.176-6.176H24v-3.992H7.646l6.176-6.176L10.975 1 0 12z" />
+                </svg>
+            </button>
+
+            <button class="slider__arrow slider__arrow--next glide__arrow glide__arrow--next" data-glide-dir=">">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path
+                        d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z" />
+                </svg>
+            </button>
+        </div>
+
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function (event) {
+        var glide = new Glide('#intro2', {
+            type: 'carousel',
+            perView: 6,
+            focusAt: 'center',
+            breakpoints: {
+                1500: {
+                    perView: 4
+                },
+                1200: {
+                    perView: 3
+                },
+                800: {
+                    perView: 2
+                },
+                480: {
+                    perView: 1
+                }
+            }
+        })
+
+        glide.mount()
+
+    })
+</script>
+<div class="discount__img__2">
+    <img src="{% static 'images/disc1.jpg' %}" alt="">
+    <img src="{% static 'images/disc2.jpg' %}" alt="">
+</div>
+<div class="example__frame">
+    <div class="product__name__and__view__all">
+        <h1> silk sarees</h1>
+        <h1><a href="{% url 'silk_saree' %}">View All</a></h1>
+    </div>
+    <div id="intro3" class="slider glide">
+        <div class="slider__track glide__track" data-glide-el="track">
+            <ul class="slider__slides glide__slides">
+
+                {% for i in silk_saree %}
+                <li class="slider__frame glide__slide" style="background-image: url({{i.imageurl}})">
+                    <div class="bg__img__info__pricing">
+                        <div class="bg__img__product__info">
+                            <h1>{{i.name}} </h1>
+                            <h1><i class="fas fa-rupee-sign"></i> {{i.price}}/-<span><a
+                                        href="{% url 'product_details' i.id %}">View<i
+                                            class="fas fa-external-link-alt"></i></a></span>
+                            </h1>
+                        </div>
+                        <div class="bg__img__buttons">
+                            <button style="margin-left: 15px;" data-product={{i.id}} data-action="add" data-fuck="buy"
+                                class="add-to-cart btn update-cart" style="transition: 0.4s;">
+                                <i class="fas fa-rupee-sign"></i> &nbsp;
+                                Buy Now</button>
+                            <button data-product={{i.id}} data-action="add" class="add-to-cart btn update-cart"
+                                style="transition: 0.4s;"><i class="fa fa-shopping-cart"></i> &nbsp; Add to
+                                Cart</button>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+
+        <div data-glide-el="controls">
+            <button class="slider__arrow slider__arrow--prev glide__arrow glide__arrow--prev" data-glide-dir="<">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path d="M0 12l10.975 11 2.848-2.828-6.176-6.176H24v-3.992H7.646l6.176-6.176L10.975 1 0 12z" />
+                </svg>
+            </button>
+
+            <button class="slider__arrow slider__arrow--next glide__arrow glide__arrow--next" data-glide-dir=">">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path
+                        d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z" />
+                </svg>
+            </button>
+        </div>
+
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function (event) {
+        var glide = new Glide('#intro3', {
+            type: 'carousel',
+            perView: 6,
+            focusAt: 'center',
+            breakpoints: {
+                1500: {
+                    perView: 4
+                },
+                1200: {
+                    perView: 3
+                },
+                800: {
+                    perView: 2
+                },
+                480: {
+                    perView: 1
+                }
+            }
+        })
+
+        glide.mount()
+
+    })
+</script>
+<div class="example__frame">
+    <div class="product__name__and__view__all">
+        <h1> westerns</h1>
+        <h1><a href="{% url 'western_wear' %}">View All</a></h1>
+    </div>
+    <div id="intro4" class="slider glide">
+        <div class="slider__track glide__track" data-glide-el="track">
+            <ul class="slider__slides glide__slides should_be__padded_bottom">
+                {% for i in westerns %}
+                <li class="slider__frame glide__slide" style="background-image: url({{i.imageurl}})">
+                    <div class="bg__img__info__pricing">
+                        <div class="bg__img__product__info">
+                            <h1>{{i.name}} </h1>
+                            <h1><i class="fas fa-rupee-sign"></i> {{i.price}}/-<span><a
+                                        href="{% url 'product_details' i.id %}">View<i
+                                            class="fas fa-external-link-alt"></i></a></span>
+                            </h1>
+                        </div>
+                        <div class="bg__img__buttons">
+                            <button style="margin-left: 15px;" data-product={{i.id}} data-action="add" data-fuck="buy"
+                                class="add-to-cart btn update-cart" style="transition: 0.4s;"><i
+                                    class="fas fa-rupee-sign"></i> &nbsp;
+                                Buy Now</button>
+                            <button data-product={{i.id}} data-action="add" class="add-to-cart btn update-cart"
+                                style="transition: 0.4s;"><i class="fa fa-shopping-cart"></i> &nbsp; Add to
+                                Cart</button>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div data-glide-el="controls">
+            <button class="slider__arrow slider__arrow--prev glide__arrow glide__arrow--prev" data-glide-dir="<">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path d="M0 12l10.975 11 2.848-2.828-6.176-6.176H24v-3.992H7.646l6.176-6.176L10.975 1 0 12z" />
+                </svg>
+            </button>
+
+            <button class="slider__arrow slider__arrow--next glide__arrow glide__arrow--next" data-glide-dir=">">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path
+                        d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z" />
+                </svg>
+            </button>
+        </div>
+
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function (event) {
+        var glide = new Glide('#intro4', {
+            type: 'carousel',
+            perView: 6,
+            focusAt: 'center',
+            breakpoints: {
+                1500: {
+                    perView: 4
+                },
+                1200: {
+                    perView: 3
+                },
+                800: {
+                    perView: 2
+                },
+                480: {
+                    perView: 1
+                }
+            }
+        })
+
+        glide.mount()
+
+    })
+</script>
+<div class="the__back__ground__image"></div>
+<div class="example__frame">
+    <div class="product__name__and__view__all">
+        <h1> Traditionals</h1>
+        <h1><a href="{% url 'traditional_wear' %}">View All</a></h1>
+    </div>
+    <div id="intro5" class="slider glide">
+        <div class="slider__track glide__track" data-glide-el="track">
+            <ul class="slider__slides glide__slides">
+                {% for i in traditionals %}
+                <li class="slider__frame glide__slide" style="background-image: url({{i.imageurl}})">
+                    <div class="bg__img__info__pricing">
+                        <div class="bg__img__product__info">
+                            <h1>{{i.name}} </h1>
+                            <h1><i class="fas fa-rupee-sign"></i> {{i.price}}/-<span><a
+                                        href="{% url 'product_details' i.id %}">View<i
+                                            class="fas fa-external-link-alt"></i></a></span>
+                            </h1>
+                        </div>
+                        <div class="bg__img__buttons">
+                            <button style="margin-left: 15px;" data-product={{i.id}} data-action="add" data-fuck="buy"
+                                class="add-to-cart btn update-cart" style="transition: 0.4s;">
+                                <i class="fas fa-rupee-sign"></i>&nbsp; Buy Now</button>
+                            <button data-product={{i.id}} data-action="add" class="add-to-cart btn update-cart"
+                                style="transition: 0.4s;"><i class="fa fa-shopping-cart"></i> &nbsp; Add to
+                                Cart</button>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div data-glide-el="controls">
+            <button class="slider__arrow slider__arrow--prev glide__arrow glide__arrow--prev" data-glide-dir="<">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path d="M0 12l10.975 11 2.848-2.828-6.176-6.176H24v-3.992H7.646l6.176-6.176L10.975 1 0 12z" />
+                </svg>
+            </button>
+
+            <button class="slider__arrow slider__arrow--next glide__arrow glide__arrow--next" data-glide-dir=">">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path
+                        d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z" />
+                </svg>
+            </button>
+        </div>
+
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function (event) {
+        var glide = new Glide('#intro5', {
+            type: 'carousel',
+            perView: 6,
+            focusAt: 'center',
+            breakpoints: {
+                1500: {
+                    perView: 4
+                },
+                1200: {
+                    perView: 3
+                },
+                800: {
+                    perView: 2
+                },
+                480: {
+                    perView: 1
+                }
+            }
+        })
+
+        glide.mount()
+
+    })
+</script>
+
+
+{% endblock %}

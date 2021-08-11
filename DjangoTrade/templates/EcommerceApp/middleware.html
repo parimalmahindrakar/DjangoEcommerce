@@ -1,0 +1,30 @@
+{% extends '../base.html' %}
+{% block content %}
+<style>
+    #server_load {
+        min-height: 77vh;
+        
+    }
+    #server_load >div {
+        width: 100%;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%,-50%  );
+    }
+     #server_load >div h1 {
+         width: 75%;
+         text-align: center;
+         margin: 0 auto;
+         font-weight: bold;
+     }
+</style>
+
+<div class="text-center" id="server_load">
+    <div>
+    <h1 style="font-weight: 300;color: orange;">Service is under maintaince. We are very apologize for this.</h1>
+
+    </div>
+</div>
+
+{% endblock %}

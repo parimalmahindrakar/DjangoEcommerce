@@ -1,0 +1,39 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block content %}
+{% load checkloginstring from templatefilters %}
+
+<style>
+    .login__page input[type="submit"]{
+        cursor: pointer;
+        transition:0.4s 
+    }
+    .login__page input[type="submit"]:hover {
+        background-color: orange;
+        color: #fff;
+    }
+</style>
+<div class="login__page">
+
+    <div class="login__page__form">
+        <h1 class="login__page__form__heading">Login</h1>
+        {% for message in messages %}
+        {% if message|checkloginstring %}
+        <p id="messages" style="color: green;">{{message}}</p>
+        {% else %}
+        <p id="messages" style="color: red;">{{message}}</p>
+        {% endif %}
+        {% endfor %} <br>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username...">
+            <input type="password" type="password" name="password" placeholder="Password...">
+            <input href="" type="submit">
+        </form>
+        <div class="login__page__ask__for__signup__forgotpassowrd">
+            <small>Need account ? <a href="{% url 'signup' %}">Signup</a></small>
+            <small><a  href="{% url 'request_reset_email' %}">Forgot password ?</a></small>
+        </div>
+    </div>
+</div>
+{% endblock %}

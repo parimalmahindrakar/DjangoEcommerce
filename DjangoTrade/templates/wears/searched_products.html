@@ -1,0 +1,62 @@
+{% extends '../base.html' %}
+{% block content %}
+{% load static %}
+<style>
+    .searched__products__not__found {
+        position: absolute;
+        top: 30%; 
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: none;
+        
+    }
+
+    .searched__products__not__found h1 {
+        font-weight: 300;
+        color: orange;
+        text-align: center;
+        width: 400px;
+    }
+    @media (max-width: 450px) {
+         .searched__products__not__found h1 {
+             width: 250px;
+             
+         }
+    }
+</style>
+{% if products %}
+<div class="my__container__products">
+    {% for i in products %}
+    <div class="flip__card">
+        <div class="flip__card__inner">
+            <div class="flip__card__front">
+                <img src="{{i.imageurl}}" alt="Avatar" style="width:300px;height:300px;">
+            </div>
+            <div class="flip__card__back">
+                <span class="flip__card__back__info">
+                    <h1>{{i.name}}</h1>
+                    <h3>{{i.price}}<a href="{% url 'product_details' i.id %}">View<i
+                                class="fas fa-external-link-alt"></i></a></h3>
+                </span>
+                <span class="flip__card__back__buttons">
+                    <button data-product={{i.id}} data-action="add" data-fuck="buy" class="add-to-cart btn update-cart"
+                        style="transition: 0.4s;"><i class="fas fa-rupee-sign"></i> &nbsp;
+                        Buy Now</button>
+                    <button data-product={{i.id}} data-action="add" class="add-to-cart btn update-cart"
+                        style="transition: 0.4s;"><i class="fa fa-shopping-cart"></i> &nbsp; Add to
+                        Cart</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% else %}
+<div class="searched__products__not__found">
+   <h1>Searched products not found !</h1>
+</div>
+{% endif %}
+
+
+{% endblock %}

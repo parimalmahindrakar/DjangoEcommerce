@@ -1,0 +1,223 @@
+{% extends '../base.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    .signup__container {
+       margin-bottom: 25vh;
+    }
+    .is-invalid {
+        box-shadow: 0px 0px 10px red !important;
+    }
+    .signup__container__main__signup form input[type="submit"] {
+        background: transparent;
+        box-shadow: 0px 0px 2px orange;
+        cursor: pointer;
+        transition: 0.4s;
+    }
+    .signup__container__main__signup form input[type="submit"]:hover {
+        background-color: orange;
+        color: #fff;
+    }
+    .errorlist {
+        color: red;
+    }
+    .signup__container__main__signup textarea {
+        width: 100%;
+    }
+</style>
+<div class="signup__container">
+    
+    <div class="signup__container__main__signup">
+        <h1 class="signup__container__main__signup__heading">Signup</h1>
+        <form method="POST">
+            <p id="valid-the-username" style="color: red; font-size: 10px; margin-bottom: 5px;">
+                {{form.errors}}
+            </p>
+            <p id="valid-the-email" style="color: red; font-size: 10px; margin-bottom: 5px;"></p> <br>
+            {% csrf_token %}
+            {{form.username}}
+            {{form.email}}
+            {{form.phone}}
+            <div class="signup__container__main__signup__collapse">
+                {{form.first_name}}
+                {{form.last_name}}
+            </div>
+            {{form.address}}
+            <p id="valid-the-zipcode" style="color: red; font-size: 10px; margin-bottom: 5px;"></p>
+            <div class="signup__container__main__signup__collapse">
+                {{form.zipcode}}
+                {{form.city}}
+            </div>
+            {{form.state}}  
+             {{form.password1}}
+             {{form.password2}}
+            <input id="regisetering__account" type="submit" value="Register">
+        </form>
+    </div>
+
+    <div class="signup__container__img">
+        <div class="swiper-container1">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image:url({% static 'images/girls/sunny2.jpg' %})"></div>
+                <div class="swiper-slide" style="background-image:url({% static 'images/girls/3.jpg' %})"></div>
+                <div class="swiper-slide" style="background-image:url({% static 'images/girls/4.jpg' %})"></div>
+                <div class="swiper-slide" style="background-image:url({% static 'images/girls/sunny5.jpg' %})"></div>
+                <div class="swiper-slide" style="background-image:url({% static 'images/girls/sunny8.jpg' %})"></div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $("#regisetering__account").click(()=>{
+        $(".loading-screen").show()
+    })
+    var swiper = new Swiper('.swiper-container1', {
+        effect: 'cube',
+        grabCursor: true,
+        speed: 1500,
+        autoplay: {
+            delay: 3000
+        },
+        cubeEffect: {
+            shadow: true,
+            slideShadows: true,
+            shadowOffset: 20,
+            shadowScale: 0.94,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        },
+    });
+
+
+    $("#id_username").attr("placeholder","Username")
+    $("#id_email").attr("placeholder", "Email")
+    $("#id_phone").attr("placeholder", "Mobile Number")
+    $("#id_first_name").attr("placeholder", "First Name")
+    $("#id_last_name").attr("placeholder", "Last Name")
+    $("#id_address").attr("placeholder", "Address")
+    $("#id_zipcode").attr("placeholder", "Zipcode")
+    $("#id_city").attr("placeholder", "City")
+    $("#id_state").attr("placeholder", "State")
+    $("#id_password1").attr("placeholder", "Enter Password")
+    $("#id_password2").attr("placeholder", "Confirm Password")
+
+    document.getElementById("id_address").setAttribute("placeholder", "Address")
+    document.getElementById('id_city').setAttribute('readonly', true);
+    document.getElementById('id_state').setAttribute('readonly', true);
+
+    var uname = document.getElementById("id_username")
+    const feedbackField = document.getElementById("valid-the-username")
+    uname.addEventListener("keyup", (e) => {
+        const usernameVal = e.target.value;
+        url = "/username_validation/"
+        if (usernameVal.length > 0) {
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+                    "username": usernameVal
+                })
+
+            }).then(res => res.json()).then(data => {
+                if (data.UsernameError) {
+                    uname.classList.add("is-invalid")
+                    feedbackField.innerHTML = `<p>${data.UsernameError}</p>`
+                } else {
+                    uname.classList.remove("is-invalid")
+                    feedbackField.innerHTML = `<p></p>`
+                }
+            })
+        } else {
+            uname.classList.remove("is-invalid")
+            feedbackField.innerHTML = `<p></p>`
+        }
+    })
+
+
+
+    var uemail = document.getElementById("id_email")
+    const feedbackField1 = document.getElementById("valid-the-email")
+    uemail.addEventListener("keyup", (e) => {
+        const useremailVal = e.target.value;
+        url = "/useremail_validation/"
+        if (useremailVal.length > 0) {
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+                    "useremail": useremailVal
+                })
+
+            }).then(res => res.json()).then(data => {
+                if (data.UserEmailError) {
+                    uemail.classList.add("is-invalid")
+                    feedbackField1.innerHTML = `<p>${data.UserEmailError}</p>`
+                } else {
+                    uemail.classList.remove("is-invalid")
+                    feedbackField1.innerHTML = `<p></p>`
+                }
+            })
+        } else {
+            uemail.classList.remove("is-invalid")
+            feedbackField1.innerHTML = `<p></p>`
+        }
+    })
+
+
+
+    var zipcode = document.getElementById("id_zipcode")
+    var feedbackField2 = document.getElementById("valid-the-zipcode")
+    zipcode.addEventListener("keyup", (e) => {
+        const zipcode_ = e.target.value;
+        url = "/postalcode_validation/"
+        if (zipcode_.length >= 6) {
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+                    "postalcode": zipcode_
+                })
+
+            }).then(res => res.json()).then(data => {
+                if (data.POSTAL_CODE) {
+                    zipcode.classList.remove("is-invalid")
+                    feedbackField2.innerHTML = `<p></p>`
+                    document.getElementById('id_city').value = data.area_info.data.city
+                    document.getElementById('id_state').value = data.area_info.data.state
+                } else {
+                    zipcode.classList.add("is-invalid")
+                    feedbackField2.innerHTML = `<p>We are not rechable</p>`
+                    document.getElementById('id_city').value = ""
+                    document.getElementById('id_state').value = ""
+                }
+            })
+        } else {
+            zipcode.classList.remove("is-invalid")
+            feedbackField2.innerHTML = `<p></p>`
+            document.getElementById('id_city').value = ""
+            document.getElementById('id_state').value = ""
+        }
+    }
+    )
+
+</script>
+
+{% endblock %}
+
+
+

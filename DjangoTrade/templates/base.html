@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load logsignpass from templatefilters %}
+
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'css/card.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main__slider.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/my_own.css' %}">
+    <link rel="stylesheet" href="{% static 'css/loading__page.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/docs.js' %}"></script>   
+    <script src="{% static 'js/glide.js' %}"></script>
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <title>Trade</title>
+
+    <script>
+        var user = "{{request.user}}"
+        const shipping = true
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getToken('csrftoken');
+    </script>
+
+</head>
+
+<body>
+    <div class="loading-screen">
+        <div class="loader-wrap">
+            <span class="loader-animation"></span>
+            <div class="loading-text">
+                <span class='letter'>L</span>
+                <span class='letter'>O</span>
+                <span class='letter'>A</span>
+                <span class='letter'>D</span>
+                <span class='letter'>I</span>
+                <span class='letter'>N</span>
+                <span class='letter'>G</span>
+            </div>
+        </div>
+    </div>
+    <a href="#top">
+        <div class="up__arrow pulse">
+            <img src="{% static 'images/up.png' %}">
+        </div>
+    </a>
+
+    {% include 'nav.html' %}
+    <div class="my__container">
+        {% block content %}
+        {% endblock %}
+        {% if request.path|logsignpass %}
+            
+        {% else %}
+        <footer>
+            <div class="footer__div">
+                <p>Copyright &copy; 2021. All rights reserved.</p>
+            </div>
+        </footer>
+        {% endif %}
+        
+    </div>
+    
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>

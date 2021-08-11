@@ -1,0 +1,134 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block content %}
+{% load checkpayment from templatefilters %}
+{% load orderbydate from templatefilters %}
+
+
+<div class="checkout__page">
+    <div class="checkout__page__user__address" id="checkout__page__user__address__id">
+        <span class="checkout__page__user__address__close__icon">&#215;</span>
+        <span class="checkout__page__user__address__close__icon take__up">&raquo;</span>
+        <p>
+            Hello {{request.user.customer.name|title}}, your orders will be deliverd at <span id="main__address__here">
+                {{form.address.value}},
+                {{form.city.value}} - {{form.zipcode.value}}, {{form.state.value}}</span>. 
+                <span id="should__not__touch">You can still edit address <a href="{% url 'updateAddress' %}">here</a>.</span>
+        </p>
+    </div>
+    <div class="checkout__products">
+        <h1 class="recent__orders">Orders Summary</h1>
+        <h2 class="recent__orders__price__info">Items : {{order.get_cart_items}} <br> Total : {{order.get_cart_total|floatformat:2 }}/-</h2>
+        <div class="cart__items">
+            <div
+                class="cart__items__elements display__none__on__mobile checkout__page__only__four cart__items__elements__pro">
+                <h1></h1>
+                <h1>Item</h1>
+                <h1>Quantity</h1>
+                <h1>Total</h1>
+            </div>
+            <hr class="cart__items__elements__after__hr"> <br> <br>
+            <div class="scrollable">
+                {% for item in items %}
+                <div class="cart__items__elements__sub">
+                    <div class="cart__items__elements checkout__page__only__four cart__items__elements__scrolling">
+                        <div>
+                            <img class="cart__fucking__image" src="{{item.product.imageurl}}" alt="">
+                        </div>
+                        <div>
+                            <h1>{{item.product.name}}</h1>
+                        </div>
+                        <div>
+                            <div class="up__down__arrows">
+                                <h1 class="Quantity__h1">x {{item.quantity}}</h1>
+                            </div>
+                        </div>
+                        <div>
+                            <h1>₹ {{item.get_total|floatformat:2}}/-</h1>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="order__button__div">
+                {% if order.get_cart_total|checkpayment %}
+                <a id="order-button-checkout" href="{% url 'process_order' %}"  class="order__button">
+                    Order Now
+                </a>
+                {% endif %}
+                
+            </div>
+        </div>
+        <h1 class="recent__orders">Recent Orders</h1>
+        <div class="cart__items">
+            <div class="cart__items__elements display__none__on__mobile cart__items__elements__pro">
+                <h1></h1>
+                <h1>Item</h1>
+                <h1>Transaction ID</h1>
+                <h1>Date ordeted</h1>
+                <h1>Is deliverd</h1>
+            </div>
+            <hr class="cart__items__elements__after__hr"> <br> <br>
+            <div class="scrollable">
+
+                {% for key,val in recent_orders_dict.items|orderbydate %}
+                {% for term in val.product %}
+                <div class="cart__items__elements__sub">
+                    <div class="cart__items__elements  cart__items__elements__scrolling">
+                        <div>
+                            <img class="cart__fucking__image" src="{{val.product.imageurl}}">
+                        </div>
+                        <div>
+                            <h1>{{term.0}} <br> x{{term.1}}</h1>
+                        </div>
+                        <div>
+                            <h1><small>{{key.transaction_id}}</small></h1>
+                        </div>
+                        <div>
+                            <h1>{{val.date_ordered}}</h1>
+                        </div>
+                        <div>
+                            <h1>{% if val.is_deliverd %}
+                            Yes. On, <br><small>{{val.date_deliverd}}</small>
+                            {% else %}
+                            Not yet.
+                            {% endif %}</h1>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    function sleep(time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+    
+
+    var order_button_checkout = document.getElementById("order-button-checkout")
+    var order_button_info = document.getElementById("order-information-checkout")
+    order_button_checkout.addEventListener("click", () => {
+        $("span#should__not__touch").hide()
+        $(".loading-screen").show()
+        order_button_checkout.classList.add("hidden")
+        order_button_info.classList.remove("hidden")
+    })
+</script>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+

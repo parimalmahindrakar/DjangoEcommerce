@@ -1,0 +1,302 @@
+{% extends '../base.html' %}
+{% block content %}
+{% load static %}
+{% load makerange from templatefilters %}
+{% load checkstring from templatefilters %}
+{% load orderbydate from templatefilters %}
+
+<div class="my__container__productdetails__page">
+    <div class="my__container__productdetails__page__image">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {% for image in images %}
+                <div class="swiper-slide" style="background-image:url({{image}})"></div>
+                {% endfor %}
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="add__buy__buttons__product__details">
+            <button data-product={{product.id}} data-action="add" data-fuck="buy"
+                class="add-to-cart btn update-cart" style="transition: 0.4s;"><i class="fas fa-rupee-sign"></i> &nbsp;
+                Buy Now</button>
+            <button data-product={{product.id}} data-action="add" class="add-to-cart btn update-cart" style="transition: 0.4s;"><i
+                    class="fa fa-shopping-cart"></i> &nbsp; Add to
+                Cart</button>
+        </div>
+    </div>
+    <div class="my__container__productdetails__page__information">
+        <p class="specification__para">
+            <span>Specifications</span>
+        </p>
+        <div class="product__specifications__container">
+            {% for message in messages %}
+            {% if message|checkstring %}
+            <p id="messages" style="color: green; margin-bottom: 5px;">{{message}}</p>
+            {% else %}
+            <p id="messages" style="color: red; margin-bottom: 5px;">{{message}}</p>
+            {% endif %}
+            {% endfor %}
+            <div class="postal__code__validations__box">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form}}
+                    <button type="submit" class="btn btn-light">Check</button>
+                </form>
+            </div> <br> 
+            <h1>Product Details</h1>
+            <hr> <br>
+            <div class="product__specifications">
+                <div class="product__specifications__item product__specifications__item__bold">
+                    Name
+                </div>
+                <div class="product__specifications__item">
+                    {{product.name}}
+                </div>
+            </div>
+            <div class="product__specifications">
+                <div class="product__specifications__item product__specifications__item__bold">
+                    Fabric
+                </div>
+                <div class="product__specifications__item">
+                    {{product.fabric}}
+                </div>
+            </div>
+            <div class="product__specifications">
+                <div class="product__specifications__item product__specifications__item__bold">
+                    Pattern
+                </div>
+                <div class="product__specifications__item">
+                    {{product.pattern}}
+                </div>
+            </div>
+            <div class="product__specifications">
+                <div class="product__specifications__item product__specifications__item__bold">
+                    Color
+                </div>
+                <div class="product__specifications__item">
+                    {{product.color}}
+                </div>
+            </div>
+            <div class="product__specifications">
+                <div class="product__specifications__item product__specifications__item__bold">
+                    Num of set
+                </div>
+                <div class="product__specifications__item">
+                    {{product.in_the_pack}}
+                </div>
+            </div>
+            <br> <br>
+            <h1>Additional Details</h1>
+            <hr> <br>
+
+            <div class="product__specifications">
+                <div class="product__specifications__item product__specifications__item__bold">
+                    Style
+                </div>
+                <div class="product__specifications__item product__specifications__item__freedom">
+                    {{product.style}}
+                </div>
+            </div>
+
+            <div class="product__specifications">
+                <div class="product__specifications__item product__specifications__item__bold">
+                    Category
+                </div>
+                <div class="product__specifications__item product__specifications__item__freedom">
+                    {{product.category}}
+                </div>
+            </div>
+            <br> <br>
+            <h1>Price</h1>
+            <hr> <br>
+            <div class="product__specifications">
+                <div class="product__specifications__item product__specifications__item__bold" style="color: #f79831; font-size: 1.5em;">
+                    ₹ {{product.price}}/-
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+{% if request.user.is_authenticated %}
+<div class="my__container__review__box">
+    <form action="">
+        <textarea id="rating-view" name=""></textarea>
+        <div class="my__container__review__box__stars">
+            <span class="star-rating star-rating-pm my__container__review__box__stars__span">
+                <span>
+                    <span class="far fa-star" data-rating="1"></span>
+                    <span class="far fa-star" data-rating="2"></span>
+                    <span class="far fa-star" data-rating="3"></span>
+                    <span class="far fa-star" data-rating="4"></span>
+                    <span class="far fa-star" data-rating="5"></span>
+                    <input type="hidden" name="whatever1" class="rating-value">
+                </span>
+                <span>
+                    <input id="product-review-button" class="btn btn-warning" type="button" value="Submit">
+                </span>
+            </span>
+        </div>
+    </form>
+</div>
+{% endif %}
+
+
+{% for product_review in product_reviews|orderbydate %}
+<div class="my__container__user__given__review">
+    <div class="user__information__for__review">
+        <article>
+            <span>User</span> : {{product_review.customer.name}} <span>Date</span> : {{product_review.date|date:"M d, Y"}}
+        </article>
+        <article>
+            <span>Ratings </span>:
+            {% for value in product_review.stars|makerange %}
+            <i class="fa fa-star" style="color: #f79831;"></i>
+            {% endfor %}
+        </article>
+    </div>
+    <div class="actual__review">
+        <span>{{product_review.review}}</span>
+    </div>
+</div>
+{% endfor %}
+
+
+
+<div class="product__details__recommendations">
+    <div class="example__frame">
+        <div id="intro6" class="slider glide">
+            <div class="slider__track glide__track" data-glide-el="track">
+                <ul class="slider__slides glide__slides">
+                    {% for i in all_slider_products_list %}
+                    <li class="slider__frame glide__slide" style="background-image: url({{i.imageurl}})">
+                        <div class="bg__img__info__pricing">
+                            <div class="bg__img__product__info">
+                                <h1>{{i.name}} </h1>
+                                <h1>{{i.price}}<span><a href="{% url 'product_details' i.id %}">View<i class="fas fa-external-link-alt"></i></a></span>
+                                </h1>
+                            </div>
+                            <div class="bg__img__buttons">
+                                <button style="margin-left: 15px;" data-product={{i.id}} data-action="add"
+                                    data-fuck="buy" class="add-to-cart btn update-cart" style="transition: 0.4s;">
+                                    <i class="fas fa-rupee-sign"></i> &nbsp;
+                                    Buy Now</button>
+                                <button data-product={{i.id}} data-action="add" class="add-to-cart btn update-cart"
+                                    style="transition: 0.4s;"><i class="fa fa-shopping-cart"></i> &nbsp; Add to
+                                    Cart</button>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div data-glide-el="controls">
+                <button class="slider__arrow slider__arrow--prev glide__arrow glide__arrow--prev" data-glide-dir="<">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                        <path d="M0 12l10.975 11 2.848-2.828-6.176-6.176H24v-3.992H7.646l6.176-6.176L10.975 1 0 12z" />
+                    </svg>
+                </button>
+
+                <button class="slider__arrow slider__arrow--next glide__arrow glide__arrow--next" data-glide-dir=">">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                        <path
+                            d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z" />
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function (event) {
+        var glide = new Glide('#intro6', {
+            type: 'carousel',
+            perView: 4,
+            focusAt: 'center',
+            breakpoints: {
+                1500: {
+                    perView: 4
+                },
+                1200: {
+                    perView: 3
+                },
+                800: {
+                    perView: 2
+                },
+                480: {
+                    perView: 1
+                }
+            }
+        })
+
+        glide.mount()
+
+    })
+</script>
+
+<script>
+    $("#id_Postal_Code").attr("placeholder","Check your postal code here.")
+    var swiper = new Swiper('.swiper-container', {
+        effect: 'cube',
+        speed: 1500,
+        autoplay: {
+            delay: 3000
+        },
+        grabCursor: true,
+        cubeEffect: {
+            shadow: true,
+            slideShadows: true,
+            shadowOffset: 20,
+            shadowScale: 0.94,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        },
+    });
+    var product_review_button = $("#product-review-button")
+    product_review_button.click(() => {
+        if (user === "AnonymousUser") {
+            alert("Please login to add the review.")
+        } else {
+            var customer = user;
+            var product = "{{product.id}}"
+            var review = $("#rating-view").val()
+            var stars = $("span.fas").length
+            console.log(stars)
+            var url = "/update_review/"
+            if (stars < 1) {
+                alert("Please rate the product.")
+            } else {
+                if(review.length < 10) {
+                    alert("Please review the product with some words.")
+                }else {
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json",
+                            'X-CSRFToken': csrftoken
+                        },
+                        body: JSON.stringify({
+                            'customer': customer,
+                            'productid': product,
+                            'review': review,
+                            'stars': stars,
+                        })
+                    }).then((response) => {
+                        return response.json()
+                    }).then((data) => {
+                        console.log('data', data);
+                        location.reload()
+                    })
+                }
+            }
+        }
+    })
+</script>
+{% endblock %}

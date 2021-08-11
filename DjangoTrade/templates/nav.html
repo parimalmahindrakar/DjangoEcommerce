@@ -1,0 +1,97 @@
+{% load static %}
+<header>
+    <nav>
+        <div class="logo">
+            <a href="{% url 'store' %}"><img src="{% static 'images/Trade.png' %}"></a>
+        </div>
+        <div class="search__bar__header">
+            <input type="text" id="nav-search-input-bar" >
+            <input type="button" value="search" id="nav-search-functionlaity" style="cursor: pointer;">
+        </div>
+        <div class="cart__header__desktop">
+            <a href="{% url 'cart' %}" style="cursor: pointer;"><i class="fas fa-shopping-cart"></i></a>
+            <span>{% if cartItems %} {{cartItems}} {% else %} 0 {% endif %}</span>
+        </div>
+    </nav>
+</header>
+<div class="main__navigations">
+    <div class="main__navigations__div">
+        <ul class="main__navigations__div__ul">
+            <li class="main__navigations__div__li on__mobile_d_none" style="font-weight: bold;"><a href="{% url 'store' %}">Home</a></li>
+            <li class="main__navigations__div__li on__mobile_d_none">
+                <a class="categ" style="font-weight: bold;">Categories <i class="fas fa-caret-down"></i></a>
+                <div class="div__categories__items">
+                    <p><a href="{% url 'paithani' %}">Paithanis</a></p>
+                    <p><a href="{% url 'semi_paithani' %}">Semi Paithanis</a></p>
+                    <p><a href="{% url 'silk_saree' %}">Silk Saaries</a></p>
+                    <p><a href="{% url 'traditional_wear' %}">Traditionals</a></p>
+                    <p><a href="{% url 'western_wear' %}">Westerns</a></p>
+                </div>
+            </li>
+            {% if request.user.is_authenticated %}
+            <li class="main__navigations__div__li save__from__left"><a href="{% url 'checkout' %}" class="anchor__remains__same"
+                    style="font-weight: bold;"><i class="fas fa-user"></i> Hi, {{request.user.customer.name|title}}.</a></li>
+            <li class="main__navigations__div__li">
+                <a href="{% url 'logout' %}" class="anchor__remains__same" style="padding-bottom: 0;font-weight: bold;">Logout <i
+                        class="fas fa-sign-out-alt"></i> </a>
+            </li>
+            {% else %}
+            <li class="main__navigations__div__li save__from__left"><a href="{% url 'signup' %}" class="anchor__remains__same"
+                    style="font-weight: bold;"><i class="fas fa-user-plus"></i></i> Signup</a></li>
+            <li class="main__navigations__div__li turn__towards__left__mobile__view">
+                <a href="{% url 'login' %}" class="anchor__remains__same" style="padding-bottom: 0;font-weight: bold;"><i class="fas fa-sign-in-alt"></i> Login </a>
+            </li>
+            {% endif %}
+            <div class="bars save__from__right">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </ul>
+
+    </div>
+</div>
+
+<div class="mobile__nav__fade__and__show">
+    <div class="mobile__nav__fade__and__show__text">
+        <li><a href="{% url 'store' %}">Home</a></li>
+        <li>
+            <a href="">Categories</a>
+            <div>
+                <p><a href="{% url 'paithani' %}">Paithanis</a></p>
+                <p><a href="{% url 'semi_paithani' %}">Semi Paithanis</a></p>
+                <p><a href="{% url 'silk_saree' %}">Silk Saaries</a></p>
+                <p><a href="{% url 'traditional_wear' %}">Traditionals</a></p>
+                <p><a href="{% url 'western_wear' %}">Westerns</a></p>
+            </div>
+        </li>
+    </div>
+</div>
+<div class="mobile__nav__fade__and__show__circle"></div>
+
+<script>
+    var navSearchFunctionality = document.getElementById("nav-search-functionlaity")
+    navSearchFunctionality.addEventListener("click", () => {
+        var inputDataSearchBar = document.getElementById("nav-search-input-bar")
+        if (inputDataSearchBar.value == "") {
+            alert("Please input something to search.")
+        } else {
+            var url = "/wears/searhced_products/"
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+                    'name': inputDataSearchBar.value
+                })
+            }).then((response) => {
+                return response.json()
+            }).then((data) => {
+                window.location.href = url;
+            })
+        }
+    })
+
+</script>

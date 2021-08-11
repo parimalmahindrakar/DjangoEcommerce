@@ -1,0 +1,147 @@
+{% if request.user.is_superuser %}
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load orderbydate from templatefilters %}
+{% load checklength from templatefilters %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/esite_details.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script>
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getToken('csrftoken');
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+    <div class="main__person__content__details">
+        <div class="main__person__content__details__div">
+
+            <div class="main__person__content__details__div__userinfo">
+                <h1>User Information</h1>
+                <div class="main__person__actual">
+                    <div class="main__person__actual__div">
+                        <p>Username : </p>
+                        <p> {{username}} </p>
+                    </div>
+                    <div class="main__person__actual__div">
+                        <p>Name : </p>
+                        <p> {{name}} </p>
+                    </div>
+                    <div class="main__person__actual__div">
+                        <p> Email : </p>
+                        <p> {{email}} </p>
+                    </div>
+                    <div class="main__person__actual__div">
+                        <p> Was created :</p>
+                        <p> {{was_created}} </p>
+                    </div>
+                    <div class="main__person__actual__div">
+                        <p> Is Active ? </p>
+                        <p> {{is_active}} </p>
+                    </div>
+                    <div class="main__person__actual__div">
+                        <p> Address </p>
+                        <p class="address_user_unique"> {{address}} </p>
+                    </div>
+                    <div class="main__person__actual__div">
+                        <p> Location </p>
+                        <p> {{location}} </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main__person__his__review__section">
+                <div class="user__review__section">
+                    <div class="search__by__stars">
+                        <p>Search by stars</p>
+                        <input id="taking_user_reviews" type="number" min="0" max="5">
+                    </div>
+                    <div class="user__review__section__main">
+                        <p>Product name</p>
+                        <p>Review</p>
+                        <p>Stars</p>
+                    </div> <br>
+                    <hr class="seperate__review"> <br> <br>
+                    <div class="scrollable__review">
+                        {% if related_reviews %}
+                        {% for review in related_reviews %}
+                        <div class="user__review__section__main">
+                            <p class="whole__review"> {{review.product}} </p>
+                            <p class="whole__review with_left">On <span style="padding: 2px; border: 1px solid #ddd;margin: 1px;">{{review.date}}</span>  {{review.review}} </p>
+                            <p class="whole__review"> {{review.stars}} </p>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <h1 style="text-align: center;">No reviews</h1>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        $("input#taking_user_reviews").on("change keyup", () => {
+                var stars = $("input#taking_user_reviews").val()
+                var url = "/AdminModel/get_reviews_onstars/"
+                if (stars > 0 && stars < 6) {
+                    fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            'X-CSRFToken': csrftoken
+                        },
+                        body: JSON.stringify({
+                            "stars": stars,
+                            "userid":"{{id_}}"
+                        })
+                    }).then((res) => {
+                        return res.json()
+                    }).then((data) => {
+                        $(".scrollable__review").empty()
+                        for(let i=0;i< data.msg.count;i++) {
+                            $(".scrollable__review").append(
+                                '<div class="user__review__section__main">\
+                                    <p class="whole__review">'+ data.msg.product[i] +'</p>\
+                                    <p class="whole__review with_left"> On '+ data.msg.date_written[i]+', '+ data.msg.review[i] +'</p>\
+                                    <p class="whole__review">'+ data.msg.stars[i]+'</p>\
+                                </div >'
+                            )
+                        }
+                    })
+                } else{
+                    location.reload()
+                }
+            })
+    </script>
+</body>
+
+</html>
+{% endif %}

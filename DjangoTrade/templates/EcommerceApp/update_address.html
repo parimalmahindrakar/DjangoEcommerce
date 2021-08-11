@@ -1,0 +1,132 @@
+{% extends '../base.html' %}
+{% block content %}
+{% load static %}
+<style>
+    #edit__address__button {
+        padding: 8px 4px;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        background:transparent;
+        box-shadow: 0px 0px 2px orange;
+        color: orange;
+        font-weight: bold;
+        transition: 0.5s;
+        border-radius: 7px;
+    }
+    #edit__address__button:hover {
+        background-color: orange;
+        color: #fff;
+    }
+    .errorlist {
+        color: red;
+        font-size: 0.9em;
+        margin-bottom: 15px;
+    }
+</style>
+<div class="signup__container">
+
+    <div class="signup__container__main__signup">
+        <h1 class="signup__container__main__signup__heading">Edit address</h1>
+        {{form.errors}}
+        <form method="POST">
+            {% csrf_token %}
+            {{form.phone}}
+            {{form.address}}
+            <p id="valid-the-zipcode" style="color: red;"></p> <br>
+            {{form.zipcode}}
+            {{form.city}}
+            {{form.state}}
+            <button id="edit__address__button" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="signup__container__img">
+        <div class="swiper-container1">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image:url({% static 'images/girls/sunny2.jpg' %})"></div>
+                <div class="swiper-slide" style="background-image:url({% static 'images/girls/3.jpg' %})"></div>
+                <div class="swiper-slide" style="background-image:url({% static 'images/girls/4.jpg' %})"></div>
+                <div class="swiper-slide" style="background-image:url({% static 'images/girls/sunny5.jpg' %})"></div>
+                <div class="swiper-slide" style="background-image:url({% static 'images/girls/sunny8.jpg' %})"></div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+</div>
+<script>
+    var swiper = new Swiper('.swiper-container1', {
+        effect: 'cube',
+        grabCursor: true,
+        speed: 1500,
+        autoplay: {
+            delay: 3000
+        },
+        cubeEffect: {
+            shadow: true,
+            slideShadows: true,
+            shadowOffset: 20,
+            shadowScale: 0.94,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        },
+    });
+
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder = 'City';
+    form_fields[2].placeholder = 'Zipcode';
+    form_fields[3].placeholder = 'State';
+
+    document.getElementById("id_phone").setAttribute("placeholder", "Phone number")
+    document.getElementById("id_address").setAttribute("placeholder", "Address")
+    document.getElementById("id_zipcode").setAttribute("placeholder", "Zipcode")
+    document.getElementById("id_city").setAttribute("placeholder", "City")
+    document.getElementById("id_state").setAttribute("placeholder", "State")
+
+    document.getElementById('id_city').setAttribute('readonly', true);
+    document.getElementById('id_state').setAttribute('readonly', true);
+
+
+    var zipcode = document.getElementById("id_zipcode")
+    var feedbackField2 = document.getElementById("valid-the-zipcode")
+    zipcode.addEventListener("keyup", (e) => {
+        const zipcode_ = e.target.value;
+        url = "/postalcode_validation/"
+        if (zipcode_.length >= 6) {
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+                    "postalcode": zipcode_
+                })
+
+            }).then(res => res.json()).then(data => {
+                if (data.POSTAL_CODE) {
+                    zipcode.classList.remove("is-invalid")
+                    feedbackField2.innerHTML = `<p></p>`
+                    document.getElementById('id_city').value = data.area_info.data.city
+                    document.getElementById('id_state').value = data.area_info.data.state
+                } else {
+                    zipcode.classList.add("is-invalid")
+                    feedbackField2.innerHTML = `<p>We are not rechable</p>`
+                    document.getElementById('id_city').value = ""
+                    document.getElementById('id_state').value = ""
+                }
+            })
+        } else {
+            zipcode.classList.remove("is-invalid")
+            feedbackField2.innerHTML = `<p></p>`
+            document.getElementById('id_city').value = ""
+            document.getElementById('id_state').value = ""
+        }
+    }
+    )
+</script>
+
+{% endblock %}

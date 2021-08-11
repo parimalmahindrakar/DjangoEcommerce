@@ -1,0 +1,156 @@
+{% if request.user.is_superuser %}
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load orderbydate from templatefilters %}
+{% load checklength from templatefilters %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/esite_details.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script>
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getToken('csrftoken');
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+    <header class="first__header">
+        <div class="header__boxex">
+            <h1><a class="deliverd_orders">Deliverd Orders</a></h1>
+            <h1>{{delivered_orders}}</h1>
+        </div>
+        <div class="header__boxex">
+            <h1><a class="total_orders">Total Orders</a></h1>
+            <h1>{{total_orders}}</h1>
+        </div>
+        <div class="header__boxex">
+            <h1><a class="pending_orders">Pending Orders</a></h1>
+            <h1>{{pending_orders}}</h1>
+        </div>
+    </header>
+    <header class="second__header">
+        <div class="on__md__boxes_without_span">
+            <h1><a>Total Orders</a></h1>
+            <h1>{{total_orders}}</h1>
+        </div>
+        <span class="on__md__boxes__span">
+            <div class="on__md__boxes">
+                <h1><a class="deliverd_orders">Deliverd Orders</a></h1>
+                <h1>{{delivered_orders}}</h1>
+            </div>
+            <div class="on__md__boxes">
+                <h1><a class="pending_orders">Pending Orders</a></h1>
+                <h1>{{pending_orders}}</h1>
+            </div>
+        </span>
+    </header>
+    <section class="searching__functionality">
+        <div class="search__user__functionlaity make__border">
+            <div class="heading__and__search">
+                <h1>Our Customers</h1>
+                <div class="search__the__user">
+                    <input id="take_input_text" type="text">
+                    <button id="take_the_name_input"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <br>
+            <hr> <br>
+            <div class="arrange__users__by__grid">
+                <p>UserdbID</p>
+                <p>Name</p>
+                <p>Was Created</p>
+                <p>Details</p>
+            </div>
+            <br>
+            <hr> <br>
+
+            <div class="scrollable add_data">
+                {% for user in users|orderbydate %}
+                <div class="arrange__users__by__grid">
+                    <p> {{user.id}} </p>
+                    <p>
+                        {% if user.user.is_active %}
+                        {{user.name}}
+                        {% else %}
+                        <span style="color: red;">*</span>
+                        {{user.name}}
+                        {% endif %}
+                    </p>
+                    <p>{{user.date_created.date}}</p>
+                    <p><a href="{% url 'cust_detail' user.id %}">Details</a></p>
+                </div> <br>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="fucking__address">
+            <p></p>
+        </div>
+        <div class="search__user__functionlaity margin__left">
+            <div class="heading__and__search">
+                <h1>Search Order</h1>
+                <div class="search__the__user">
+                    <input id="take__orders__input" type="text">
+                    <button id="take__orders__button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <br>
+            <hr> <br>
+            <div class="arrange__users__by__grid">
+                <p>Product Name</p>
+                <p>Ordered</p>
+                <p>Deliverd</p>
+                <p class="chnge_to_prson">TransactionID</p>
+            </div>
+            <br>
+            <hr> <br>
+            <div class="scrollable orders__apppend">
+                {% for key,val in recent_orders_dict.items|orderbydate %}
+
+                {% for term in val.product %}
+                <div class="arrange__users__by__grid orders__informations">
+                    <p>{{term.0}}<span style="color: red;"> x{{term.1}}</span> </p>
+                    <p>{{val.date_ordered.date}} </p>
+                    <p>
+                        {% if val.is_deliverd %}
+                        {{val.date_deliverd.date}}
+                        {% else %}
+                        None
+                        {% endif %}
+                    </p>
+                    <p class="some_need_ful_info">{{key.transaction_id}}</p>
+                </div> <br>
+                {% endfor %}
+
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <script src="{% static 'js/get_order_admin_model.js' %}"></script>
+</body>
+
+</html>
+{% endif %}
+
+
+

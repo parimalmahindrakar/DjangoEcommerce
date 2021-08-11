@@ -1,0 +1,42 @@
+{% extends '../base.html' %}
+{% block content %}
+{% load static %}
+<div class="cart__items cart__items__cart__only">
+    <div class="cart__items__elements cart__items__elements__pro">
+        <h1><a href="{% url 'checkout' %}">Checkout</a></h1>
+        <h1>Item</h1>
+        <h1>Price</h1>
+        <h1>Quantity</h1>
+        <h1>Total</h1>
+    </div>
+    <div class="cart__items__elements__sub">
+        {% for item in items %} 
+        <div class="cart__items__elements cart__items__elements__scrolling">
+            <div>
+                <img class="cart__fucking__image" src="{{item.product.imageurl}}" alt="">
+            </div>
+            <div>
+                <h1>{{item.product.name}}</h1>
+            </div>
+            <div>
+                <h1>{{item.product.price|floatformat:2}}</h1>
+            </div>
+            <div>
+                <div class="up__down__arrows">
+                    <div class="up__down__arrows__imgs">
+                        <img class="update-cart" data-product={{item.product.id}} data-action="add" src="{% static 'images/uparo.png' %}">
+                        <img class="update-cart" data-product={{item.product.id}} data-action="remove" src="{% static 'images/downaro.png' %}">
+                    </div>
+                    <h1 class="Quantity__h1">x {{item.quantity}}</h1>
+                </div>
+            </div>
+            <div>
+                <h1>{{item.get_total|floatformat:2}}</h1>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

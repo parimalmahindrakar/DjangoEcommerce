@@ -1,0 +1,31 @@
+{% extends '../base.html' %}
+{% block content %}
+{% load static %}
+<h1 class="products__header__title"> westerns</h1>
+<div class="my__container__products">
+    {% for i in westerns %}
+    <div class="flip__card">
+        <div class="flip__card__inner">
+            <div class="flip__card__front">
+                <img src="{{i.imageurl}}" alt="Avatar" style="width:300px;height:300px;">
+            </div>
+            <div class="flip__card__back">
+                <span class="flip__card__back__info">
+                    <h1>{{i.name}}</h1>
+                    <h3><i class="fas fa-rupee-sign"></i> {{i.price}}/-<a href="{% url 'product_details' i.id %}">View<i class="fas fa-external-link-alt"></i></a></h3>
+                </span>
+                <span class="flip__card__back__buttons">
+                    <button data-product={{i.id}} data-action="add" data-fuck="buy"
+                        class="add-to-cart btn update-cart" style="transition: 0.4s;"><i class="fas fa-rupee-sign"></i> &nbsp;
+                        Buy Now</button>
+                    <button data-product={{i.id}} data-action="add" class="add-to-cart btn update-cart" style="transition: 0.4s;"><i
+                            class="fa fa-shopping-cart"></i> &nbsp; Add to
+                        Cart</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

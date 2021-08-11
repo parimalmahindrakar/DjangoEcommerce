@@ -1,0 +1,758 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #908f8c;
+    transition: 0.4s;
+}
+
+a:hover {
+    color: #00917c;
+}
+
+i {
+    color: #908f8c;
+}
+
+*::-webkit-scrollbar {
+    width: 2px;
+    /* width of the entire scrollbar */
+    height: 0px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #fff;
+    /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: blue;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid #83ebc7;
+    /* creates padding around scroll thumb */
+}
+
+td {
+    text-align: center;
+}
+
+header.first__header {
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    height: 500px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    padding-top: 100px;
+}
+
+header.first__header .header__boxex {
+    width: 300px;
+    height: 300px;
+    box-shadow: 0px 0px 8px #999;
+    justify-self: center;
+    padding-top: 40px;
+}
+
+header.first__header .header__boxex:nth-child(2) {
+    width: 550px;
+}
+
+@media (max-width: 1238px) {
+    header.first__header .header__boxex:nth-child(2) {
+        width: 500px;
+    }
+}
+
+@media (max-width: 1182px) {
+    header.first__header .header__boxex:nth-child(2) {
+        width: 450px;
+    }
+}
+
+@media (max-width: 1100px) {
+    header.first__header .header__boxex:nth-child(2) {
+        width: 400px;
+    }
+}
+
+@media (max-width: 1058px) {
+    header.first__header .header__boxex:nth-child(2) {
+        width: 350px;
+    }
+
+    header.first__header .header__boxex:nth-child(2) h1 {
+        font-size: 2.5em;
+        padding-top: 5px;
+    }
+
+    header.first__header .header__boxex:nth-child(2) h1:nth-child(2) {
+        font-size: 3em;
+    }
+}
+
+@media (max-width: 992px) {
+    header.first__header .header__boxex:nth-child(2) {
+        width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    header.first__header .header__boxex:nth-child(2) {
+        width: 80%;
+    }
+}
+
+@media (max-width: 1030px) {
+    header.first__header .header__boxex {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+@media (max-width: 797px) {
+    header.first__header .header__boxex {
+        width: 170px;
+        height: 170px;
+    }
+}
+
+header.first__header .header__boxex h1 {
+    padding-top: 40px;
+    text-align: center;
+    color: #fff;
+}
+
+header.first__header .header__boxex h1 a {
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 5px 5px 10px #333;
+    padding: 8px;
+}
+
+header.first__header .header__boxex h1 a:hover {
+    text-shadow: 1px 1px 5px #333;
+}
+
+header.first__header .header__boxex h1 a:focus {
+    outline: none;
+    border: none;
+}
+
+header.first__header .header__boxex h1:nth-child(2) {
+    font-size: 4em;
+}
+
+header.first__header .header__boxex:nth-child(1) h1,
+header.first__header .header__boxex:nth-child(3) h1 {
+    font-size: 1.5em;
+}
+
+header.first__header .header__boxex:nth-child(1) h1:nth-child(2),
+header.first__header .header__boxex:nth-child(3) h1:nth-child(2) {
+    font-size: 2.5em;
+}
+
+@media (max-width: 1029px) {
+
+    header.first__header .header__boxex:nth-child(1) h1:nth-child(2),
+    header.first__header .header__boxex:nth-child(3) h1:nth-child(2) {
+        font-size: 1.4em;
+    }
+}
+
+@media (max-width: 1029px) {
+
+    header.first__header .header__boxex:nth-child(1) h1,
+    header.first__header .header__boxex:nth-child(3) h1 {
+        font-size: 1.4em;
+    }
+}
+
+@media (max-width: 797px) {
+
+    header.first__header .header__boxex:nth-child(1) h1,
+    header.first__header .header__boxex:nth-child(3) h1 {
+        font-size: 1em;
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 1030px) {
+    header.first__header {
+        height: 400px;
+        padding-top: 80px;
+    }
+}
+
+@media (max-width: 797px) {
+    header.first__header {
+        height: 300px;
+        padding-top: 60px;
+    }
+}
+
+@media (max-width: 763px) {
+    header.first__header {
+        display: none;
+    }
+}
+
+header.second__header {
+    height: 400px;
+    width: 100%;
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+header.second__header .on__md__boxes,
+header.second__header .on__md__boxes_without_span {
+    box-shadow: 0px 0px 8px #999;
+    justify-self: center;
+}
+
+header.second__header .on__md__boxes_without_span {
+    width: 80%;
+    height: 150px;
+    margin-top: 20px !important;
+    padding-top: 25px;
+}
+
+@media (max-width: 450px) {
+    header.second__header .on__md__boxes_without_span {
+        width: 90%;
+    }
+}
+
+header.second__header .on__md__boxes_without_span h1 {
+    font-size: 1.7em;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 25px;
+}
+
+header.second__header .on__md__boxes_without_span h1:nth-child(2) {
+    font-size: 2em;
+}
+
+@media (max-width: 417px) {
+    header.second__header .on__md__boxes_without_span h1:nth-child(2) {
+        font-size: 1.7em;
+    }
+}
+
+header.second__header .on__md__boxes_without_span h1 a {
+    text-decoration: none;
+    color: #fff;
+    text-shadow: 5px 5px 15px #333;
+}
+
+header.second__header .on__md__boxes_without_span h1 a:hover {
+    text-shadow: 1px 1px 5px #333;
+}
+
+@media (max-width: 417px) {
+    header.second__header .on__md__boxes_without_span h1 {
+        font-size: 1.2em;
+    }
+}
+
+header.second__header .on__md__boxes__span {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+header.second__header .on__md__boxes__span .on__md__boxes {
+    width: 70%;
+    height: 150px;
+    padding-top: 35px;
+}
+
+@media (max-width: 450px) {
+    header.second__header .on__md__boxes__span .on__md__boxes {
+        height: 130px;
+        width: 80%;
+    }
+}
+
+header.second__header .on__md__boxes__span .on__md__boxes h1 {
+    font-size: 1em;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 25px;
+}
+
+header.second__header .on__md__boxes__span .on__md__boxes h1:nth-child(2) {
+    font-size: 1.4em;
+}
+
+@media (max-width: 417px) {
+    header.second__header .on__md__boxes__span .on__md__boxes h1:nth-child(2) {
+        font-size: 1em;
+    }
+}
+
+header.second__header .on__md__boxes__span .on__md__boxes h1 a {
+    text-decoration: none;
+    color: #fff;
+    text-shadow: 5px 5px 15px #333;
+}
+
+header.second__header .on__md__boxes__span .on__md__boxes h1 a:hover {
+    text-shadow: 1px 1px 5px #333;
+}
+
+@media (max-width: 417px) {
+    header.second__header .on__md__boxes__span .on__md__boxes h1 {
+        font-size: 0.8em;
+    }
+}
+
+@media (min-width: 763px) {
+    header.second__header {
+        display: none;
+    }
+}
+
+section.searching__functionality {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+    margin: 45px 0;
+}
+
+@media (max-width: 992px) {
+    section.searching__functionality {
+        grid-gap: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    section.searching__functionality {
+        grid-template-columns: 1fr;
+        grid-gap: 0px;
+    }
+}
+
+section.searching__functionality div.search__user__functionlaity,
+section.searching__functionality div.search__trns__id__functionality {
+    height: 700px;
+}
+
+@media (max-width: 1624px) {
+
+    section.searching__functionality div.search__user__functionlaity,
+    section.searching__functionality div.search__trns__id__functionality {
+        height: 600px;
+    }
+}
+
+@media (max-width: 1400px) {
+
+    section.searching__functionality div.search__user__functionlaity,
+    section.searching__functionality div.search__trns__id__functionality {
+        height: 550px;
+    }
+}
+
+@media (max-width: 1200px) {
+
+    section.searching__functionality div.search__user__functionlaity,
+    section.searching__functionality div.search__trns__id__functionality {
+        height: 500px;
+    }
+}
+
+@media (max-width: 992px) {
+
+    section.searching__functionality div.search__user__functionlaity,
+    section.searching__functionality div.search__trns__id__functionality {
+        height: 550px;
+    }
+}
+
+@media (max-width: 850px) {
+
+    section.searching__functionality div.search__user__functionlaity,
+    section.searching__functionality div.search__trns__id__functionality {
+        height: 450px;
+    }
+}
+
+section.searching__functionality div.make__border {
+    border-right: 1px #ddd solid;
+}
+
+section.searching__functionality div.search__user__functionlaity {
+    padding: 25px 15px;
+}
+
+@media (max-width: 1100px) {
+    section.searching__functionality div.search__user__functionlaity {
+        padding: 5px;
+    }
+}
+
+section.searching__functionality div.search__user__functionlaity .heading__and__search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+section.searching__functionality div.search__user__functionlaity .heading__and__search h1 {
+    color: #999;
+}
+
+@media (max-width: 1100px) {
+    section.searching__functionality div.search__user__functionlaity .heading__and__search h1 {
+        font-size: 1em;
+    }
+}
+
+section.searching__functionality div.search__user__functionlaity .heading__and__search .search__the__user {
+    display: flex;
+}
+
+section.searching__functionality div.search__user__functionlaity .heading__and__search .search__the__user input,
+section.searching__functionality div.search__user__functionlaity .heading__and__search .search__the__user button {
+    padding: 5px;
+    border: none;
+    outline: none;
+    box-shadow: 0px 0px 1px #555;
+    color: #777;
+}
+
+@media (max-width: 1100px) {
+
+    section.searching__functionality div.search__user__functionlaity .heading__and__search .search__the__user input,
+    section.searching__functionality div.search__user__functionlaity .heading__and__search .search__the__user button {
+        padding: 4px;
+    }
+}
+
+section.searching__functionality div.search__user__functionlaity .heading__and__search .search__the__user button {
+    cursor: pointer;
+}
+
+@media (max-width: 375px) {
+    section.searching__functionality div.search__user__functionlaity .heading__and__search .search__the__user input {
+        width: 160px;
+    }
+}
+
+@media (max-width: 322px) {
+    section.searching__functionality div.search__user__functionlaity .heading__and__search .search__the__user input {
+        width: 130px;
+    }
+}
+
+section.searching__functionality div.search__user__functionlaity hr {
+    border: none;
+    height: 1px;
+    background-color: #eee;
+}
+
+section.searching__functionality div.search__user__functionlaity div.scrollable {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+@media (max-width: 1624px) {
+    section.searching__functionality div.search__user__functionlaity div.scrollable {
+        height: 450px;
+    }
+}
+
+@media (max-width: 1400px) {
+    section.searching__functionality div.search__user__functionlaity div.scrollable {
+        height: 400px;
+    }
+}
+
+@media (max-width: 1200px) {
+    section.searching__functionality div.search__user__functionlaity div.scrollable {
+        height: 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    section.searching__functionality div.search__user__functionlaity div.scrollable {
+        height: 390px;
+    }
+}
+
+@media (max-width: 850px) {
+    section.searching__functionality div.search__user__functionlaity div.scrollable {
+        height: 320px;
+    }
+}
+
+section.searching__functionality div.search__user__functionlaity div.orders__informations p {
+    align-self: center;
+}
+
+section.searching__functionality div.search__user__functionlaity div.orders__informations p:first-child {
+    max-height: 70px;
+    overflow-y: scroll;
+    padding: 0 10px 0 15px;
+}
+
+section.searching__functionality div.search__user__functionlaity div.arrange__users__by__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+section.searching__functionality div.search__user__functionlaity div.arrange__users__by__grid p {
+    justify-self: center;
+}
+
+@media (max-width: 1400px) {
+    section.searching__functionality div.search__user__functionlaity div.arrange__users__by__grid p {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 450px) {
+    section.searching__functionality div.search__user__functionlaity div.arrange__users__by__grid p {
+        font-size: 0.6em;
+    }
+}
+
+.fucking__address {
+    position: absolute;
+    right: 0;
+    width: 425px;
+    height: 125px;
+    text-align: justify;
+    overflow-y: scroll;
+    padding: 20px;
+    z-index: 500;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+
+.fucking__address p {
+    margin-bottom: 10px;
+    width: 100%;
+    color: #fff;
+    font-weight: bold;
+}
+
+.main__person__content__details {
+    height: 600px;
+    width: 100%;
+    background-blend-mode: multiply, multiply;
+    color: #777;
+}
+
+.main__person__content__details__div {
+    width: 90%;
+    margin: auto;
+    height: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid #ddd;
+}
+
+@media (max-width: 1094px) {
+    .main__person__content__details__div {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 455px) {
+    .main__person__content__details__div {
+        width: 100%;
+        border: none;
+    }
+}
+
+.main__person__content__details__div__userinfo {
+    height: 100%;
+    border-right: 1px #ddd solid;
+    padding-top: 50px;
+}
+
+@media (max-width: 440px) {
+    .main__person__content__details__div__userinfo {
+        padding-top: 10px;
+    }
+}
+
+.main__person__content__details__div__userinfo h1 {
+    padding-left: 20px;
+    border-bottom: 1px #ddd solid;
+    width: 50%;
+    margin-left: 20px;
+    padding-bottom: 8px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+@media (max-width: 1530px) {
+    .main__person__content__details__div__userinfo h1 {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 660px) {
+    .main__person__content__details__div__userinfo h1 {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 395px) {
+    .main__person__content__details__div__userinfo h1 {
+        font-size: .8em;
+    }
+}
+
+@media (max-width: 375px) {
+    .main__person__content__details__div__userinfo h1 {
+        font-size: .6em;
+        padding-left: 1px;
+    }
+}
+
+.main__person__content__details__div__userinfo .main__person__actual {
+    width: 80%;
+    margin: 45px auto;
+    padding-bottom: 20px;
+}
+
+.main__person__content__details__div__userinfo .main__person__actual__div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.main__person__content__details__div__userinfo .main__person__actual__div p:first-child {
+    width: 100px;
+}
+
+@media (max-width: 1530px) {
+    .main__person__content__details__div__userinfo .main__person__actual__div p:first-child {
+        width: 135px;
+    }
+}
+
+@media (max-width: 534px) {
+    .main__person__content__details__div__userinfo .main__person__actual__div p:first-child {
+        width: 100px;
+    }
+}
+
+.main__person__content__details__div__userinfo .main__person__actual__div p:last-child {
+    width: 80%;
+}
+
+.main__person__content__details__div__userinfo .main__person__actual__div p.address_user_unique {
+    text-align: justify;
+}
+
+@media (max-width: 768px) {
+    .main__person__content__details__div__userinfo .main__person__actual__div p {
+        font-size: .9em;
+    }
+}
+
+@media (max-width: 534px) {
+    .main__person__content__details__div__userinfo .main__person__actual__div p {
+        font-size: 0.7em;
+    }
+}
+
+@media (max-width: 1094px) {
+    .main__person__content__details__div {
+        border-bottom: 1px solid #fff;
+    }
+}
+
+.main__person__content__details .main__person__his__review__section {
+    padding: 20px;
+}
+
+.main__person__content__details .main__person__his__review__section .user__review__section__main {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 0.4fr;
+    margin-bottom: 20px;
+}
+
+.main__person__content__details .main__person__his__review__section .user__review__section__main p {
+    justify-self: center;
+    align-self: center;
+}
+
+.main__person__content__details .main__person__his__review__section .user__review__section__main p.whole__review {
+    text-align: justify;
+    height: 80px;
+    overflow-y: scroll;
+    padding: 15px;
+    border: 1px solid #ddd;
+    
+}
+.main__person__content__details .main__person__his__review__section .user__review__section__main .with_left {
+    justify-self: start;
+}
+
+@media (max-width: 768px) {
+    .main__person__content__details .main__person__his__review__section .user__review__section__main p {
+        font-size: .9em;
+    }
+}
+
+@media (max-width: 534px) {
+    .main__person__content__details .main__person__his__review__section .user__review__section__main p {
+        font-size: 0.7em;
+    }
+}
+
+.main__person__content__details .main__person__his__review__section .user__review__section .search__by__stars {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+}
+
+.main__person__content__details .main__person__his__review__section .user__review__section .search__by__stars input {
+    width: 50px;
+    padding: 6px;
+}
+
+.main__person__content__details .main__person__his__review__section .user__review__section .search__by__stars input:focus {
+    border: 2px #ddd solid;
+    outline: none;
+}
+
+.main__person__content__details .main__person__his__review__section .user__review__section .search__by__stars p {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.main__person__content__details .main__person__his__review__section .user__review__section .scrollable__review {
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.main__person__content__details .main__person__his__review__section hr.seperate__review {
+    border: none;
+    background-color: #ddd;
+    height: 1px;
+}
+
