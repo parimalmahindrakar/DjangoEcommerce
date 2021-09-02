@@ -61,9 +61,6 @@ def validate_email(email):
     return False
 
 
-def some():
-    print("fuck")
-
 
 class RequestResetPasswordView(View):
     def get(self, request):
@@ -321,8 +318,7 @@ def cart(request):
 def store(request):
 
     paithanis = Product.objects.filter(category__iexact="paithani")[:12]
-    semi_paithanis = Product.objects.filter(
-        category__iexact="semi_paithani")[:12]
+    semi_paithanis = Product.objects.filter(category__iexact="semi_paithani")[:12]
     westerns = Product.objects.filter(category__iexact="western")[:12]
     traditionals = Product.objects.filter(category__iexact="traditional")[:12]
     silk_saree = Product.objects.filter(category__iexact="silk_saree")[:12]
@@ -484,6 +480,7 @@ def checkout(request):
     recent_orders_dict = {}
     if recent_orders.exists():
         for i in recent_orders:
+            print(i)
             recent_orders_dict.update({
                 i: {
                     'product': [(j.product, j.quantity) for j in i.orderitem_set.filter(order=i)],

@@ -6,7 +6,7 @@ STATIC_DIR = os.path.join(BASE_DIR, "static")
 MEDIA_DIR = os.path.join(BASE_DIR, "media")
 SECRET_KEY = 'wu7v#qcp!s3u+btr_5t_f2s8iq$tqvld5i2h^zr(6mi-$g1r@m'
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
     
 INSTALLED_APPS = [ 
@@ -69,10 +69,20 @@ WSGI_APPLICATION = 'EcommerceProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Ecommerce',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
     }
 }
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'db.sqlite3',
+#     }
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {

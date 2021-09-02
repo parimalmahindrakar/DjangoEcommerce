@@ -26,6 +26,7 @@ def checkloginstring_(str_):
 
 @register.filter(name='orderbydate')
 def orderbydate_(list_):
+    print(list_)
     return reversed(list_)
     # return list_
 

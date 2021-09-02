@@ -33,7 +33,7 @@
                 <div class="cart__items__elements__sub">
                     <div class="cart__items__elements checkout__page__only__four cart__items__elements__scrolling">
                         <div>
-                            <img class="cart__fucking__image" src="{{item.product.imageurl}}" alt="">
+                            <img class="cart__image__" src="{{item.product.imageurl}}" alt="">
                         </div>
                         <div>
                             <h1>{{item.product.name}}</h1>
@@ -76,10 +76,12 @@
                 <div class="cart__items__elements__sub">
                     <div class="cart__items__elements  cart__items__elements__scrolling">
                         <div>
-                            <img class="cart__fucking__image" src="{{val.product.imageurl}}">
+                            <img class="cart__image__" src="{{val.product.0.0.imageurl}}">
                         </div>
                         <div>
                             <h1>{{term.0}} <br> x{{term.1}}</h1>
+                            <!-- <h1>{{val.product.1.0.imageurl}} <br> x{{term.1}}</h1> -->
+
                         </div>
                         <div>
                             <h1><small>{{key.transaction_id}}</small></h1>
