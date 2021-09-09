@@ -39,18 +39,17 @@ $("a[href='#top']").click(function (e) {
     $("html, body").animate({ scrollTop: 0 }, "slow");
     return false;
 });
-
+   
 
 $(document).ready(
 	function () {
 		$(".loading-screen").hide()
 		var updateBtns = document.getElementsByClassName("update-cart");
 		for (var i = 0; i < updateBtns.length; i++) {
-
 			updateBtns[i].addEventListener('click', function () {
 				var productid = this.getAttribute("data-product")
 				var action = this.getAttribute("data-action")
-				var buy = this.getAttribute("data-fuck")
+				var buy = this.getAttribute("data-to-buy")
 				if (user === "AnonymousUser") {
 					alert("Please login to add items to cart.")
 				} else {

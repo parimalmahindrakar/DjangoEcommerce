@@ -124,9 +124,10 @@ class ProductReview(models.Model):
     review = models.CharField(max_length=256,null=True,blank=True)
     stars = models.PositiveIntegerField(null=True,blank=True)
     date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
     def __str__(self):
         return str(self.customer.name)+" : "+ str(self.product.name)
-
+    
 class Order(models.Model):
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)

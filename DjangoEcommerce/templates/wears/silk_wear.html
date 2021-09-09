@@ -15,7 +15,7 @@
                     <h3><i class="fas fa-rupee-sign"></i> {{i.price}}/-<a href="{% url 'product_details' i.id %}">View<i class="fas fa-external-link-alt"></i></a></h3>
                 </span>
                 <span class="flip__card__back__buttons">
-                <button data-product={{i.id}} data-action="add" data-fuck="buy"
+                <button data-product={{i.id}} data-action="add" data-to-buy="buy"
                     class="add-to-cart btn update-cart" style="transition: 0.4s;"><i class="fas fa-rupee-sign"></i> &nbsp;
                     Buy Now</button>
                 <button data-product={{i.id}} data-action="add" class="add-to-cart btn update-cart" style="transition: 0.4s;"><i
