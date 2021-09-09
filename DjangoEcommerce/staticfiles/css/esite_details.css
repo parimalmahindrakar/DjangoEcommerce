@@ -531,7 +531,7 @@ section.searching__functionality div.search__user__functionlaity div.arrange__us
     }
 }
 
-.fucking__address {
+.users__address {
     position: absolute;
     right: 0;
     width: 425px;
@@ -544,7 +544,7 @@ section.searching__functionality div.search__user__functionlaity div.arrange__us
     border-radius: 10px;
 }
 
-.fucking__address p {
+.users__address p {
     margin-bottom: 10px;
     width: 100%;
     color: #fff;

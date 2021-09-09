@@ -149,7 +149,7 @@ $(".total_orders").click(() => {
 
 function itsucks() {
 
-    $(".fucking__address").hide()
+    $(".users__address").hide()
 
     $("div.orders__informations p.some_need_ful_info").hover(() => {
         var trns_id = $(".orders__informations p.some_need_ful_info:hover").text()
@@ -166,14 +166,14 @@ function itsucks() {
         }).then((response) => {
             return response.json()
         }).then((data) => {
-            $(".fucking__address").empty()
-            $(".fucking__address").append(
+            $(".users__address").empty()
+            $(".users__address").append(
                 '<p>' + data.data.customer + ', ' + data.data.address + ' , \
              ' + data.data.city + ' - ' + data.data.zipcode + '.\
             </p> '
             )
         })
-        $(".fucking__address").toggle()
+        $(".users__address").toggle()
     })
 
 }
